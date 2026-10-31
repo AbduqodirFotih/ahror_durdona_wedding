@@ -1,0 +1,12 @@
+{
+  "name": "ahror-durdona-wedding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ahror & Durdona to'y taklifnomasi",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
