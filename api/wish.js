@@ -4,9 +4,9 @@ const db = require("../lib/redis");
 module.exports = async (req, res) => {
   if (req.method === "GET") {
     try {
-      const wishes = await db.listWishes(300);
+      const wishes = await db.listWishes();
       res.setHeader("Cache-Control", "no-store");
-      return res.status(200).json({ ok: true, wishes });
+      return res.status(200).json({ ok: true, shared: db.enabled, wishes });
     } catch (e) {
       console.error(e.message);
       return res.status(500).json({ ok: false, error: "storage" });
@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
   if (d.website) return res.status(200).json({ ok: true });
 
   try {
-    if (await db.tooMany(`rl:wish:${tg.ip(req)}`, 6, 600)) return res.status(429).json({ ok: false, error: "rate" });
+    if (await db.tooMany(`rl:wish:${tg.ip(req)}`, 30, 600)) return res.status(429).json({ ok: false, error: "rate" });
   } catch (e) { console.error(e.message); }
 
   const name = String(d.name || "").trim().slice(0, 60);

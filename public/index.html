@@ -169,6 +169,13 @@ a{color:inherit}
 }
 .btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(227,187,122,.6),0 6px 14px rgba(0,0,0,.4)}
 .btn-gold.sm{padding:9px 22px;font-size:15px;font-family:"Cormorant Garamond",serif;font-weight:700}
+.btn-gold:disabled{filter:grayscale(.5) brightness(.75);cursor:wait;box-shadow:none}
+.btn-gold:disabled::after{display:none}
+.load{width:180px;margin:14px auto 0;transition:opacity .5s}
+.load .bar{height:3px;border-radius:3px;background:rgba(227,187,122,.18);overflow:hidden}
+.load .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c9974f,#f8e4b0);box-shadow:0 0 10px rgba(227,187,122,.7);transition:width .3s ease}
+.load small{display:block;margin-top:8px;font-family:"Lora",serif;font-size:12px;letter-spacing:.12em;color:var(--gold-soft)}
+.load.ok{opacity:0}
 .rsvp-note{margin:14px 10px 0;text-align:center;font-size:15px;line-height:1.5;color:#cbb07a}
 .btn-gold.shine::after{content:"";position:absolute;top:0;left:-70%;width:40%;height:100%;
   background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:sweep 3.2s ease-in-out infinite}
@@ -351,12 +358,12 @@ body.go .hero .n.b{animation:wipe 1.9s 1.9s cubic-bezier(.6,.05,.2,1) both,shimm
 #music.playing .mute{opacity:0}
 #music.playing::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--gold-soft);animation:ring 2.4s ease-out infinite}
 @keyframes ring{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.35);opacity:0}}
-.sign{margin:6px 28px 0;padding-bottom:44px;text-align:center}
+.sign{margin:6px 28px 0;padding-bottom:96px;text-align:center}
 .sign .orn{display:flex;align-items:center;gap:12px;color:var(--gold-soft);margin-bottom:16px}
 .sign .orn i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
 .sign .orn i:last-child{background:linear-gradient(90deg,var(--line),transparent)}
-.sign small{display:block;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8f7a4d;margin-bottom:12px}
-.sign p{max-width:290px;margin:14px auto 0;font-size:13.5px;line-height:1.55;color:#94804f}
+.sign small{display:block;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:#8f7a4d;margin-bottom:6px}
+.sign-uz{max-width:270px;margin:4px auto 14px;font-family:"EB Garamond",serif;font-style:italic;font-size:15px;line-height:1.45;color:#b79c66}
 .tg{display:inline-flex;align-items:center;gap:9px;padding:10px 20px 10px 15px;border-radius:999px;
   border:1px solid rgba(227,187,122,.42);background:rgba(227,187,122,.06);color:var(--gold);text-decoration:none;
   font-family:"Lora",serif;font-size:14px;letter-spacing:.02em;transition:background .25s,border-color .25s,box-shadow .25s}
@@ -624,7 +631,8 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
 
     <div class="ev-bottom">
       <div class="ev-msg">Sizni to'yimizga taklif qilamiz</div>
-      <button class="btn-gold shine" id="openBtn">Taklifnomani ochish</button>
+      <button class="btn-gold shine" id="openBtn" disabled>Taklifnomani ochish</button>
+      <div class="load" id="load"><div class="bar"><i id="loadBar"></i></div><small id="loadTxt">Yuklanmoqda… 0%</small></div>
     </div>
   </div>
 </div>
@@ -686,10 +694,10 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
           <svg class="mc tr" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
           <svg class="mc bl" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
           <svg class="mc br" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
-          <div class="pf-in"><img src="photos/couple-2.jpg" alt="Kelin va kuyovning qo'llari, gul dastasi yonida" width="736" height="981" loading="lazy"></div>
+          <div class="pf-in"><img src="photos/couple-2.jpg" alt="Kelin va kuyovning qo'llari, gul dastasi yonida" width="736" height="981"></div>
         </figure>
         <figure class="oval rv" data-full="photos/couple-3.jpg">
-          <div class="oval-ring"><div class="oval-in"><img src="photos/couple-3.jpg" alt="Kelin va kuyov birga qadam tashlamoqda" width="675" height="1200" loading="lazy"></div></div>
+          <div class="oval-ring"><div class="oval-in"><img src="photos/couple-3.jpg" alt="Kelin va kuyov birga qadam tashlamoqda" width="675" height="1200"></div></div>
           <span class="oval-heart"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg></span>
         </figure>
       </section>
@@ -728,7 +736,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
       <svg class="mc tr" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
       <svg class="mc bl" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
       <svg class="mc br" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
-      <div class="pf-in"><img src="photos/venue.jpg" alt="Baxt bazmgohi binosi" width="1200" height="800" loading="lazy"></div>
+      <div class="pf-in"><img src="photos/venue.jpg" alt="Baxt bazmgohi binosi" width="1200" height="800"></div>
     </figure>
     <div class="map-frame rv">
       <svg class="mc tl" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
@@ -736,7 +744,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
       <svg class="mc bl" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
       <svg class="mc br" viewBox="0 0 55 54" aria-hidden="true"><use href="#corner2"/></svg>
       <div class="map">
-        <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        <iframe referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=39.7656875,67.2900625&z=16&output=embed" title="Xarita"></iframe>
       </div>
     </div>
@@ -842,6 +850,7 @@ body.go .arch-in img{animation:kenburns 16s ease-in-out infinite alternate}
   <div class="sign rv">
     <div class="orn"><i></i><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="#star"/></svg><i></i></div>
     <small>Digital Invitation by</small>
+    <p class="sign-uz">Eng go‘zal kuningizga munosib taklifnoma yaratish uchun bizga murojaat qiling.</p>
     <a class="tg" href="https://t.me/Abduqodir_Fotih" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M21 3L3 10.6l6.2 2.4L11.6 20l3.1-4.2L19 19.5 21 3z"/><path d="M9.2 13l11.8-10"/></svg>
       @Abduqodir_Fotih
@@ -986,7 +995,7 @@ $("#envDate").textContent = `${CFG.nikoh.d} ${MONTHS[CFG.nikoh.m-1].toLowerCase(
     setTimeout(()=>{ run = false; cancelAnimationFrame(raf); }, 1300);
   }
   function open(){
-    if(opened) return; opened = true;
+    if(opened || !Preload.ready) return; opened = true;
     Music.start();
     if(reduce){ document.body.classList.remove("locked"); window.scrollTo(0,0); finish(); return; }
     env.classList.add("opening"); burst(); boost = 4;
@@ -1050,7 +1059,7 @@ $("#sched").innerHTML = CFG.schedule.map(({day,items})=>
     `<div class="row"><span class="tm">${t}</span><span class="dt"></span><span class="ev">${esc(e)}${n?`<small>${esc(n)}</small>`:""}</span></div>`).join("")}</div>`).join("");
 
 /* ==================== tilaklar (hamma ko'radi, serverda saqlanadi) ==================== */
-(function(){
+const wishesLoaded = (function(){
   const form = $("#wishForm"), ok = $("#wishOk"), btn = form.querySelector("button");
   const list = $("#wishes"), head = $("#wishHead");
   const g = $("#guestName").textContent;
@@ -1067,7 +1076,7 @@ $("#sched").innerHTML = CFG.schedule.map(({day,items})=>
     list.innerHTML = items.map(card).join("");
   }
   let items = [];
-  fetch("/api/wish", { cache: "no-store" })
+  const loaded = fetch("/api/wish", { cache: "no-store" })
     .then(r => r.json())
     .then(j => { if (j && j.ok) { items = j.wishes || []; show(items); } })
     .catch(()=>{});
@@ -1094,6 +1103,7 @@ $("#sched").innerHTML = CFG.schedule.map(({day,items})=>
       btn.disabled = false; btn.textContent = "Yuborish";
     }
   });
+  return loaded;
 })();
 
 /* ==================== sovg'a qutisi ==================== */
@@ -1138,14 +1148,11 @@ const Music = (()=>{
   const btn = $("#music"), YT_ID = "ivrumxRUz_Y";
   let mode = null, started = false, on = false, file = null, fileFailed = false;
 
-  /* fayl sahifa ochilishi bilan yuklana boshlaydi, tugma bosilganda kutish bo'lmaydi */
+  /* fayl Preload orqali to'liq yuklanadi, tugma bosilganda kutish bo'lmaydi */
   const pre = new Audio();
   pre.loop = true; pre.preload = "auto";
-  let srcSet = false;
-  const setSrc = ()=>{ if(!srcSet){ srcSet = true; pre.src = "music/toy.m4a"; } };
+  const setSrc = ()=>{ if(!pre.src) pre.src = "music/toy.m4a"; };
   pre.addEventListener("error", ()=>{ fileFailed = true; }, {once:true});
-  if(document.readyState === "complete") setSrc();
-  else window.addEventListener("load", ()=> setTimeout(setSrc, 300));
 
   const Synth = (()=>{
     let ctx, master, bus, echo, noise, timer, drone=[], step=0, nextT=0, ready=false;
@@ -1346,7 +1353,7 @@ const Music = (()=>{
     }
   });
 
-  return { start(){
+  return { setFile(url){ if(!started) pre.src = url; }, start(){
     btn.classList.add("show");
     if(started) return;
     started = true;
@@ -1358,6 +1365,67 @@ const Music = (()=>{
       if(err && err.name==="NotAllowedError") setOn(false); else fileToYT();
     });
   }};
+})();
+
+/* ==================== oldindan yuklash ==================== */
+/* rasm, shrift, tilaklar, xarita va musiqa yuklangach konvertni ochishga ruxsat beriladi */
+const Preload = (()=>{
+  const btn = $("#openBtn"), bar = $("#loadBar"), label = $("#loadTxt"), box = $("#load");
+  const MUSIC_W = 5;
+  const imgs = [...new Set([...document.querySelectorAll("img[src]")].map(i=>i.getAttribute("src")))];
+  const fonts = ['400 20px "EB Garamond"','400 20px "Cormorant Garamond"','400 20px "Great Vibes"','400 20px "Lora"','600 20px "Playfair Display"','italic 700 20px "Playfair Display"'];
+  const total = imgs.length + fonts.length + 2 + MUSIC_W;
+  let ready = false, done = 0, musicPart = 0;
+  function paint(){
+    if(ready) return;
+    const pct = Math.min(100, Math.round((done + musicPart*MUSIC_W)/total*100));
+    bar.style.width = pct+"%"; label.textContent = "Yuklanmoqda… "+pct+"%";
+  }
+  function finish(){
+    if(ready) return; ready = true;
+    bar.style.width = "100%"; label.textContent = "Tayyor";
+    btn.disabled = false; setTimeout(()=>box.classList.add("ok"), 400);
+  }
+  const wait = ms => new Promise(r=>setTimeout(r,ms));
+  const loadImg = (src, attempt=0) => new Promise(res=>{
+    const im = new Image();
+    im.onload = ()=>{
+      if(attempt) document.querySelectorAll(`img[src="${src}"]`).forEach(i=>{ if(!i.naturalWidth) i.src = src; });
+      res();
+    };
+    im.onerror = ()=>{ if(attempt < 2) wait(1200*(attempt+1)).then(()=>loadImg(src,attempt+1)).then(res); else res(); };
+    im.src = src;
+  });
+  async function loadMusic(){
+    for(let attempt=0; attempt<3; attempt++){
+      try{
+        const r = await fetch("music/toy.m4a");
+        if(!r.ok || !r.body) throw 0;
+        const len = +r.headers.get("Content-Length") || 0, reader = r.body.getReader(), parts = [];
+        let got = 0;
+        for(;;){
+          const {done:end, value} = await reader.read();
+          if(end) break;
+          parts.push(value); got += value.length;
+          if(len){ musicPart = got/len; paint(); }
+        }
+        Music.setFile(URL.createObjectURL(new Blob(parts,{type:"audio/mp4"})));
+        return;
+      }catch(e){ if(attempt < 2) await wait(1500); }
+    }
+  }
+  const map = new Promise(r=>$(".map iframe").addEventListener("load", r, {once:true}));
+  paint();
+  Promise.all([
+    ...imgs.map(s=>loadImg(s)),
+    ...fonts.map(f=>document.fonts.load(f).catch(()=>{})),
+    Promise.race([wishesLoaded, wait(10000)]),
+    Promise.race([map, wait(8000)])
+  ].map(p=>p.then(()=>{ done++; paint(); }))).then(loadMusic).then(finish);
+
+  /* juda sekin internetda ham 45 soniyadan keyin ochishga ruxsat (qolgani fonda yuklanaveradi) */
+  setTimeout(finish, 45000);
+  return { get ready(){ return ready; } };
 })();
 
 /* ==================== RSVP (Telegram botga yuboriladi) ==================== */
